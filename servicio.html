@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servicios · ZEWÁ Reformas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/zewa.css">
+</head>
+<body data-page="service">
+<div id="chrome-header"></div>
+<main id="contenido"></main>
+<div id="chrome-footer"></div>
+
+<script src="assets/app.js"></script>
+<script>
+const slug = new URLSearchParams(location.search).get('s');
+const s = SERVICES.find(x => x.slug === slug);
+const main = document.getElementById('contenido');
+
+if (!s) {
+  main.innerHTML = `<section class="notfound"><div class="wrap"><span class="eyebrow">Servicio no encontrado</span><h2>Elige un servicio</h2><p>Puedes ver todas nuestras líneas de servicio en la página de inicio.</p><a class="btn btn-primary" href="index.html#lineas">Ver servicios</a></div></section><div id="chrome-cta"></div>`;
+} else {
+  const g = groupOf(s.group);
+  document.title = `${s.name} · ZEWÁ Reformas`;
+  const waMsg = `Hola ZEWÁ, quiero un presupuesto de ${s.name}.`;
+  const kitchen = s.kitchen ? `
+  <section><div class="wrap k-grid">
+    <div class="reveal">
+      <span class="eyebrow">Qué incluye</span><h2>Tu cocina, completa</h2>
+      <div class="includes" style="margin-top:var(--s6)">
+        <div><b>Muebles a medida</b>Melamina, laca o madera natural.</div>
+        <div><b>Encimeras</b>Cuarzo, granito, porcelánico o madera.</div>
+        <div><b>Herrajes</b>Cierre suave, extraíbles y organizadores.</div>
+        <div><b>Electrodomésticos</b>Integración y conexión.</div>
+        <div><b>Instalación completa</b>Montaje, fontanería, electricidad e iluminación.</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Distribuciones</span><h2>Para cualquier espacio</h2>
+      <div class="dist" style="margin-top:var(--s6)">
+        ${[['Lineal','<rect x="10" y="10" width="44" height="8"/>'],['En L','<rect x="10" y="10" width="44" height="8"/><rect x="10" y="10" width="8" height="40"/>'],['En U','<rect x="10" y="10" width="44" height="8"/><rect x="10" y="10" width="8" height="40"/><rect x="46" y="10" width="8" height="40"/>'],['Paralela','<rect x="10" y="10" width="44" height="8"/><rect x="10" y="44" width="44" height="8"/>'],['Con isla','<rect x="10" y="10" width="44" height="8"/><rect x="20" y="34" width="24" height="10" fill="#1A3461"/>']]
+          .map(([n, r]) => `<div><svg viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="3" fill="none" stroke="#1A3461" stroke-width="2.5"/><g fill="#C39059">${r}</g></svg>${n}</div>`).join('')}
+      </div>
+      <div class="kitchen-done">¡Tu cocina, llave en mano!</div>
+    </div>
+  </div></section>
+  <section data-join style="padding-top:0"><div class="wrap">
+    <div class="sec-head reveal"><div><span class="eyebrow">Nuestro proceso</span><h2>De la medición a la entrega</h2></div><p class="lead">Pide tu diseño y presupuesto sin compromiso.</p></div>
+    <ol class="steps reveal">
+      <li class="st"><b>01</b><h3>Visita y medición</h3><p>Tomamos medidas y escuchamos tus ideas.</p></li>
+      <li class="st"><b>02</b><h3>Diseño 3D</h3><p>Ves tu cocina antes de fabricarla.</p></li>
+      <li class="st"><b>03</b><h3>Presupuesto</h3><p>Claro y detallado, sin sorpresas.</p></li>
+      <li class="st"><b>04</b><h3>Fabricación</h3><p>Muebles a medida con acabados de calidad.</p></li>
+      <li class="st"><b>05</b><h3>Instalación</h3><p>Montaje, conexiones y entrega lista para usar.</p></li>
+    </ol>
+  </div></section>` : '';
+
+  const subtypes = s.subtypes ? `
+  <section><div class="wrap">
+    <div class="sec-head reveal"><div><span class="eyebrow">Técnicas</span><h2>Elige tu acabado</h2></div><p class="lead">¡Y muchísimo más! Te asesoramos para elegir la técnica ideal para tu espacio.</p></div>
+    <div class="subtypes">${s.subtypes.map(([n, d]) => `<div class="subtype reveal"><small>Pintura decorativa</small><h3>${n}</h3><p>${d}</p></div>`).join('')}</div>
+  </div></section>` : '';
+
+  const beforeAfter = s.ba
+    ? `<div style="max-width:900px">${compareHTML(s.ba.before, s.ba.after)}</div>`
+    : `<div class="ba-ph reveal">
+        <div class="ph">${IC.cam}<b>Antes</b><span>Estado inicial del espacio. Estamos incorporando fotografías de nuestras obras.</span></div>
+        <div class="ph">${IC.cam}<b>Después</b><span>Resultado final del mismo espacio, para que compares el cambio.</span></div>
+      </div>`;
+  const extra = s.extra ? `<div class="ba-extra">${s.extra.map(e => gitem(e.img, e.t, s.name, '', false)).join('')}</div>` : '';
+
+  const related = SERVICES.filter(x => x.group === s.group && x.slug !== s.slug);
+  const relatedList = [...related, ...SERVICES.filter(x => x.featured && x.group !== s.group)].slice(0, 4);
+
+  main.innerHTML = `
+  <section class="s-hero">
+    <div class="wrap">
+      <div class="reveal">
+        <nav class="crumbs" aria-label="Migas de pan"><a href="index.html">Inicio</a><span>/</span><a href="index.html#linea-${g.id}">${g.name}</a><span>/</span>${s.name}</nav>
+        <span class="eyebrow">${g.name}</span>
+        <h1>${s.name}</h1>
+        <p class="lead">${s.lead}</p>
+        <p class="desc">${s.desc}</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="${waLink(waMsg)}" target="_blank" rel="noopener">${IC.wa}Solicitar presupuesto</a>
+          <a class="btn btn-ghost" href="tel:${ZEWA.tel}">${IC.tel}Llamar ahora</a>
+        </div>
+      </div>
+      <div class="s-media reveal"><img src="img/${s.img}" alt="${s.name}"></div>
+    </div>
+  </section>
+
+  <section><div class="wrap">
+    <div class="sec-head reveal"><div><span class="eyebrow">Qué te ofrecemos</span><h2>${s.name}, a tu medida</h2></div><p class="lead">Con el mismo equipo propio que se encarga de toda tu reforma.</p></div>
+    <div class="points">${s.points.map(p => `<div class="point reveal">${IC.check}<b>${p}</b></div>`).join('')}</div>
+  </div></section>
+
+  ${kitchen}${subtypes}
+
+  <section id="antes-despues"><div class="wrap">
+    <div class="sec-head reveal"><div><span class="eyebrow">Antes y después</span><h2>La transformación, en imágenes</h2></div><p class="lead">${s.ba ? 'Desliza para comparar. Haz clic en las fotos para ampliarlas.' : 'Galería en preparación: aquí verás el antes y el después de nuestras obras de este servicio.'}</p></div>
+    ${beforeAfter}${extra}
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="sec-head reveal"><div><span class="eyebrow">${related.length ? g.name : 'Otros servicios'}</span><h2>También te puede interesar</h2></div><a class="link-more" href="index.html#lineas">Ver todos los servicios</a></div>
+    <div class="related">${relatedList.map(pcard).join('')}</div>
+  </div></section>
+
+  <div id="chrome-cta" data-service="${s.name}"></div>`;
+}
+
+// fondos alternos entre secciones (las marcadas con data-join continúan la anterior)
+let alt = true;
+main.querySelectorAll(':scope > section:not(.s-hero)').forEach(sec => {
+  if (!sec.hasAttribute('data-join')) alt = !alt;
+  sec.classList.add(alt ? 'bg-paper' : 'bg-white');
+});
+
+renderChrome();
+initBehaviors();
+</script>
+</body>
+</html>
