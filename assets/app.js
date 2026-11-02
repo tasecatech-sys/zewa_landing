@@ -304,6 +304,16 @@ function initBehaviors(){
   document.addEventListener('click', e => { if (!hm.contains(e.target)) { hm.classList.remove('open'); db.setAttribute('aria-expanded', false); } });
   header.querySelectorAll('.mainnav a').forEach(a => a.addEventListener('click', () => { header.classList.remove('menu-open'); hm.classList.remove('open'); }));
 
+  // WhatsApp: en móvil se abre en la misma pestaña (los navegadores móviles bloquean pestañas nuevas
+  // y así se lanza la app); en ordenador, en una pestaña nueva
+  const isMobile = matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const openWA = u => {
+    if (isMobile) { location.href = u; return; }
+    const w = window.open(u, '_blank');
+    if (w) w.opener = null; else location.href = u;
+  };
+  if (isMobile) document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => a.removeAttribute('target'));
+
   // formularios → WhatsApp
   document.querySelectorAll('[data-wa-form]').forEach(form => form.addEventListener('submit', e => {
     e.preventDefault();
@@ -313,7 +323,7 @@ function initBehaviors(){
     if (d.zona) t += `\nZona: ${d.zona}.`;
     if (d.telefono) t += `\nMi teléfono: ${d.telefono}.`;
     if (d.mensaje) t += `\n${d.mensaje}`;
-    window.open(waLink(t), '_blank', 'noopener');
+    openWA(waLink(t));
   }));
 
   // aparición (solo se ocultan elementos si este script se ejecuta)
