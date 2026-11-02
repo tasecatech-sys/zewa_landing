@@ -16,7 +16,8 @@
 
 <script src="assets/app.js"></script>
 <script>
-const slug = new URLSearchParams(location.search).get('s');
+const asked = new URLSearchParams(location.search).get('s');
+const slug = ALIASES[asked] || asked;
 const s = SERVICES.find(x => x.slug === slug);
 const main = document.getElementById('contenido');
 
@@ -89,7 +90,7 @@ if (!s) {
           <a class="btn btn-ghost" href="tel:${ZEWA.tel}">${IC.tel}Llamar ahora</a>
         </div>
       </div>
-      <div class="s-media reveal"><img src="img/${s.img}" alt="${s.name}"></div>
+      <div class="s-media reveal">${media(s)}</div>
     </div>
   </section>
 

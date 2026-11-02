@@ -1,9 +1,11 @@
 /* ZEWÁ · demo — datos y comportamiento compartidos */
 const ZEWA = {
-  wa: '34641486331',
+  wa: '34641486231',
+  waTxt: '+34 641 48 62 31',
   tel: '+34641486231',
   telTxt: '+34 641 48 62 31',
-  waTxt: '+34 641 48 63 31',
+  tel2: '+34641486331',
+  tel2Txt: '+34 641 48 63 31',
   mail: 'zewareformas@gmail.com'
 };
 
@@ -11,97 +13,177 @@ const ZEWA = {
 const GROUPS = [
   { id:'reformas', name:'Reformas y construcción', short:'Reformas', desc:'Transformamos tu espacio desde la estructura.',
     icon:'<path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/>' },
-  { id:'cocinas', name:'Cocinas a medida', short:'Cocinas', desc:'Tu cocina, llave en mano.',
-    icon:'<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M8 14h2M14 14h2M7 7h.01M11 7h.01"/>' },
+  { id:'instalaciones', name:'Instalaciones y servicios', short:'Instalaciones', desc:'Todo lo que hace funcionar tu casa.',
+    icon:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>' },
   { id:'pintura', name:'Pintura y decoración', short:'Pintura', desc:'El arte en cada rincón.',
     icon:'<rect x="3" y="3" width="15" height="6" rx="1"/><path d="M18 6h2v5h-8v3"/><rect x="10" y="14" width="4" height="7" rx="1"/>' },
+  { id:'cocinas', name:'Cocinas a medida', short:'Cocinas', desc:'Tu cocina, llave en mano.',
+    icon:'<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M8 14h2M14 14h2M7 7h.01M11 7h.01"/>' },
   { id:'acabados', name:'Acabados e interiorismo', short:'Acabados', desc:'La belleza de los detalles.',
-    icon:'<path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4 1.5-7.5L3 9l6.5-.5z"/>' },
-  { id:'instalaciones', name:'Instalaciones y servicios', short:'Instalaciones', desc:'Todo lo que hace funcionar tu casa.',
-    icon:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>' }
+    icon:'<path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4 1.5-7.5L3 9l6.5-.5z"/>' }
 ];
 
-/* Servicios del portafolio (textos tomados del PDF) */
+/* Servicios (lista validada por ZEWÁ; textos del portafolio cuando existen). Sin `img` = foto pendiente. */
 const SERVICES = [
-  { n:1, slug:'steel-framing', group:'reformas', name:'Steel Framing', img:'steel.jpg',
-    lead:'Construye el futuro. Steel Framing: innovación y resistencia.',
-    desc:'Estructuras livianas y resistentes con diseños personalizados e instalación rápida y segura.',
-    points:['Estructuras livianas y resistentes','Diseños personalizados','Instalación rápida y segura'] },
-  { n:2, slug:'reformas-integrales', group:'reformas', name:'Reformas integrales', img:'integral.jpg', featured:true,
-    lead:'Reformas integrales de alta calidad.',
-    desc:'Transformamos tu vivienda o negocio de principio a fin, con diseño personalizado y un único equipo propio de todos los oficios.',
-    points:['Diseño personalizado','Equipo propio: paletas, electricistas, fontaneros, pladuristas, carpinteros e interioristas','Obras impecables, con orden, limpieza y en el plazo acordado'] },
-  { n:3, slug:'reformas-estructurales', group:'reformas', name:'Reformas estructurales', img:'despues.jpg', featured:true,
+  /* ---- Reformas y construcción ---- */
+  { slug:'reformas-integrales', group:'reformas', name:'Reformas integrales o parciales', img:'integral.jpg', featured:true,
+    lead:'Reformas integrales o parciales de alta calidad.',
+    desc:'Reformamos tu vivienda o negocio completo, o solo la parte que necesitas, con diseño personalizado y un único equipo propio de todos los oficios.',
+    points:['Reforma completa o por estancias','Diseño personalizado','Equipo propio: paletas, electricistas, fontaneros, pladuristas, carpinteros e interioristas'] },
+  { slug:'obra', group:'reformas', name:'Obra',
+    lead:'Trabajos de obra con equipo propio.',
+    desc:'Albañilería y trabajos de obra para tu reforma, con orden, limpieza y en el plazo acordado.',
+    points:['Albañilería','Viviendas, locales y oficinas','Orden y limpieza en cada jornada'] },
+  { slug:'construccion', group:'reformas', name:'Construcción',
+    lead:'Construimos contigo, de principio a fin.',
+    desc:'Proyectos de construcción con un único equipo que se encarga de todos los oficios.',
+    points:['Un solo interlocutor','Equipo propio de todos los oficios','Plazos acordados'] },
+  { slug:'reformas-estructurales', group:'reformas', name:'Reformas estructurales', img:'despues.jpg', featured:true,
     lead:'Transformamos la estructura.',
     desc:'Refuerzo, apertura de espacios y recuperación de elementos originales para que tu vivienda gane amplitud sin perder su carácter.',
     points:['Vigas metálicas de refuerzo','Apertura de espacios','Restauración de vigas de madera originales'],
     ba:{ before:'antes.jpg', after:'despues.jpg' },
     extra:[{img:'estructural-antes-1.jpg',t:'Antes · pasillo'},{img:'estructural-antes-2.jpg',t:'Antes · estancia'},{img:'despues.jpg',t:'Después'}] },
-  { n:4, slug:'pladur', group:'reformas', name:'Diseño en Pladur', img:'pladur.jpg', featured:true,
+  { slug:'pladur', group:'reformas', name:'Divisiones y diseños en pladur', img:'pladur.jpg', featured:true,
     lead:'Pladur: la libertad de diseñar.',
-    desc:'Techos, paredes y más soluciones personalizadas: hornacinas, falsos techos e iluminación integrada.',
-    points:['Techos','Paredes','Y más soluciones personalizadas'] },
-  { n:5, slug:'cocinas', group:'cocinas', name:'Cocinas personalizadas', img:'cocina2.jpg', featured:true, kitchen:true,
-    lead:'Diseñamos la cocina que siempre imaginaste.',
-    desc:'Creamos cocinas funcionales y con estilo, adaptadas a tu espacio, a tu forma de cocinar y a tu presupuesto. Te acompañamos desde el primer boceto hasta la última pieza instalada.',
-    points:['Diseño 3D previo','Materiales de alta calidad','Montaje completo, listo para usar'],
-    extra:[{img:'cocina1.jpg',t:'Cocina en U · vista lateral'},{img:'cocina2.jpg',t:'Cocina en U · vista frontal'}] },
-  { n:6, slug:'pinturas-decorativas', group:'pintura', name:'Pinturas decorativas', img:'decorativa.jpg', featured:true,
-    lead:'Diseños de pintura decorativa.',
-    desc:'Técnicas decorativas que convierten una pared en protagonista. ¡Y muchísimo más!',
-    points:['Acabados artísticos a medida','Para hogares y negocios','Asesoramiento en la elección de la técnica'],
-    subtypes:[['Óleo','Clásico y elegante'],['Veneciano','Sofisticado y luminoso'],['Barroco','Opulento y dramático'],['Mandala 3D','Geométrico y moderno'],['Microcemento','Industrial y contemporáneo'],['Pinturas industriales','Resistentes y versátiles']] },
-  { n:7, slug:'revestimientos', group:'acabados', name:'Revestimientos', img:'revestimiento.jpg',
-    lead:'La belleza de los detalles.',
-    desc:'Revestimientos de alta calidad y diseños personalizados para tu hogar o negocio.',
-    points:['Paredes','Suelos','Techos'] },
-  { n:8, slug:'iluminacion', group:'acabados', name:'Iluminación', img:'iluminacion.jpg',
-    lead:'Genera ambientes más amenos y cálidos.',
-    desc:'Variedad y diferentes tipos de iluminación para cada espacio.',
-    points:['Según la incidencia','Según la tonalidad de la luz','Decorativas'] },
-  { n:9, slug:'fontaneria', group:'instalaciones', name:'Fontanería', img:'fontaneria.jpg',
+    desc:'Divisiones, techos, paredes y soluciones personalizadas: hornacinas, falsos techos e iluminación integrada.',
+    points:['Divisiones','Techos y paredes','Diseños personalizados'] },
+  { slug:'aislamiento', group:'reformas', name:'Aislamiento térmico y acústico',
+    lead:'Más confort y menos ruido en tu espacio.',
+    desc:'Aislamos paredes, techos y suelos para mejorar el confort térmico y reducir el ruido.',
+    points:['Aislamiento térmico','Aislamiento acústico','Paredes, techos y suelos'] },
+  { slug:'steel-framing', group:'reformas', name:'Steel Framing', img:'steel.jpg',
+    lead:'Construye el futuro. Steel Framing: innovación y resistencia.',
+    desc:'Estructuras livianas y resistentes con diseños personalizados e instalación rápida y segura.',
+    points:['Estructuras livianas y resistentes','Diseños personalizados','Instalación rápida y segura'] },
+
+  /* ---- Instalaciones y servicios ---- */
+  { slug:'fontaneria', group:'instalaciones', name:'Fontanería', img:'fontaneria.jpg',
     lead:'Instalación y mantenimiento de redes hidráulicas.',
     desc:'Abastecimiento de agua potable y evacuación de aguas residuales, así como instalaciones de calefacción en viviendas y otras edificaciones.',
     points:['Abastecimiento de agua potable','Evacuación de aguas residuales','Instalaciones de calefacción'] },
-  { n:10, slug:'polarizado', group:'instalaciones', name:'Polarizado', img:'polarizado.jpg',
+  { slug:'electricidad', group:'instalaciones', name:'Electricidad',
+    lead:'Instalaciones eléctricas para tu reforma.',
+    desc:'Instalaciones y mejoras eléctricas en viviendas, locales y oficinas, a cargo de nuestros electricistas.',
+    points:['Instalaciones nuevas','Renovación de instalaciones','Conexión de iluminación y electrodomésticos'] },
+  { slug:'carpinteria', group:'instalaciones', name:'Carpintería',
+    lead:'Carpintería a medida para tu espacio.',
+    desc:'Trabajos de carpintería hechos por nuestros carpinteros e integrados en tu reforma.',
+    points:['Trabajos a medida','Integrada en tu reforma','Equipo propio'] },
+  { slug:'interiorismo', group:'instalaciones', name:'Interiorismo',
+    lead:'Espacios pensados para ti.',
+    desc:'Nuestros interioristas te ayudan a definir la distribución, los materiales, los colores y la iluminación de tu espacio.',
+    points:['Distribución del espacio','Materiales y colores','Iluminación'] },
+  { slug:'decoracion', group:'instalaciones', name:'Decoración',
+    lead:'El toque final de cada espacio.',
+    desc:'Decoración de hogares y negocios para que cada espacio tenga carácter propio.',
+    points:['Hogares','Negocios','Espacios especiales'] },
+  { slug:'mobiliario', group:'instalaciones', name:'Mobiliario a medida',
+    lead:'Muebles hechos para tu espacio.',
+    desc:'Muebles diseñados a la medida de tu espacio y de tu forma de vivir o trabajar.',
+    points:['Diseño a medida','Aprovechamiento del espacio','Integrado en tu reforma'] },
+  { slug:'transporte', group:'instalaciones', name:'Transporte',
+    lead:'Nos encargamos del transporte.',
+    desc:'Servicio de transporte para tu proyecto. Cuéntanos qué necesitas mover y te preparamos un presupuesto.',
+    points:['Transporte para tu proyecto','Coordinado con la obra','Presupuesto sin compromiso'] },
+  { slug:'embalaje-custodia', group:'instalaciones', name:'Embalaje, custodia y reposición de pertenencias',
+    lead:'Tus pertenencias, protegidas mientras trabajamos.',
+    desc:'Servicio de embalaje, custodia y reposición fiel de pertenencias para espacios completos o parciales que serán intervenidos: pisos, oficinas, locales, etc. amueblados.',
+    points:['Embalaje','Custodia durante la obra','Reposición fiel de cada pertenencia'] },
+  { slug:'impermeabilizacion', group:'instalaciones', name:'Impermeabilización',
+    lead:'Impermeabilización con todas las técnicas.',
+    desc:'Protegemos tu espacio frente al agua y la humedad con la técnica adecuada para cada caso.',
+    points:['Todas las técnicas','Protección frente a la humedad','Técnica adecuada a cada caso'] },
+  { slug:'polarizado', group:'instalaciones', name:'Polarizados', img:'polarizado.jpg',
     lead:'Evita los excesos de calor y deslumbramientos.',
     desc:'Las láminas de protección solar aportan un gran confort interior y se aplican sin obras ni molestias sobre todo tipo de acristalamientos.',
     points:['Excelente protección solar','Visión clara y sin distorsiones hacia el exterior','Notable ahorro en climatización','Reducen la entrada de calor hasta en un 91 % (según producto)','Sin obras ni molestias','Para todo tipo de acristalamientos'] },
-  { n:11, slug:'pintura', group:'pintura', name:'Pintura', img:'pintura.jpg', featured:true,
+  { slug:'aire-acondicionado', group:'instalaciones', name:'Aire acondicionado',
+    lead:'Confort todo el año.',
+    desc:'Instalación de aire acondicionado coordinada con el resto de tu reforma.',
+    points:['Instalación de equipos','Coordinada con la obra','Presupuesto sin compromiso'] },
+
+  /* ---- Pintura y decoración ---- */
+  { slug:'pintura', group:'pintura', name:'Pintura general', img:'pintura.jpg', featured:true,
     lead:'Espacios y ambientes más amplios, protegidos y acogedores.',
     desc:'Pintamos espacios vacíos o totalmente amueblados (pisos, casas y naves) cuidando tus bienes al máximo. Más allá de la estética:',
     points:['Actúa como barrera protectora contra la humedad','Protege de la corrosión','Extiende la vida útil de la estructura'] },
-  { n:12, slug:'alicatados', group:'acabados', name:'Alicatados', img:'alicatado.jpg',
+  { slug:'pinturas-decorativas', group:'pintura', name:'Pinturas decorativas', img:'decorativa.jpg', featured:true,
+    lead:'Diseños de pintura decorativa.',
+    desc:'Técnicas decorativas que convierten una pared en protagonista. ¡Y muchísimo más!',
+    points:['Acabados artísticos a medida','Para hogares y negocios','Asesoramiento en la elección de la técnica'],
+    subtypes:[['Óleo','Clásico y elegante'],['Veneciano','Sofisticado y luminoso'],['Barroco','Opulento y dramático'],['Mandala 3D','Geométrico y moderno'],['Terciopelo','Ideal para una pared especial'],['Pinturas industriales','Resistentes y versátiles']],
+    extra:[{img:'barroco.jpg',t:'Estuco barroco'},{img:'terciopelo.jpg',t:'Pintura terciopelo'},{img:'decorativa.jpg',t:'Relieves decorativos'}] },
+  { slug:'pintura-anticondensacion', group:'pintura', name:'Pintura anticondensación',
+    lead:'Menos condensación y humedad en tus paredes.',
+    desc:'Pintura especial para zonas propensas a la condensación, como baños, cocinas y paredes frías.',
+    points:['Baños y cocinas','Paredes frías','Acabado limpio'] },
+  { slug:'pintura-ignifuga', group:'pintura', name:'Pintura ignífuga según normativa',
+    lead:'Protección frente al fuego, según normativa.',
+    desc:'Aplicamos pintura ignífuga según la normativa vigente en los espacios que lo requieren.',
+    points:['Según normativa','Locales, naves y oficinas','Aplicación profesional'] },
+  { slug:'pintura-exterior', group:'pintura', name:'Pintura exterior',
+    lead:'Fachadas y exteriores renovados.',
+    desc:'Pintura para fachadas, muros y exteriores, preparada para soportar la intemperie.',
+    points:['Fachadas','Muros y exteriores','Protección frente a la intemperie'] },
+  { slug:'pintura-epoxica', group:'pintura', name:'Pintura epóxica',
+    lead:'Suelos y superficies resistentes.',
+    desc:'Pintura epóxica para suelos y superficies de mucho uso: naves, garajes y locales.',
+    points:['Naves y garajes','Locales','Zonas de mucho uso'] },
+
+  /* ---- Cocinas a medida ---- */
+  { slug:'cocinas', group:'cocinas', name:'Cocinas a medida', img:'cocina2.jpg', featured:true, kitchen:true,
+    lead:'Cocinas completas o parciales, a medida y con diseño.',
+    desc:'Creamos cocinas funcionales y con estilo, adaptadas a tu espacio, a tu forma de cocinar y a tu presupuesto. Te acompañamos desde el primer boceto hasta la última pieza instalada.',
+    points:['Cocinas completas o parciales','Diseño 3D previo','Montaje completo, listo para usar'],
+    extra:[{img:'cocina1.jpg',t:'Cocina en U · vista lateral'},{img:'cocina2.jpg',t:'Cocina en U · vista frontal'}] },
+
+  /* ---- Acabados e interiorismo ---- */
+  { slug:'microcemento', group:'acabados', name:'Microcemento',
+    lead:'Industrial y contemporáneo.',
+    desc:'Revestimiento continuo para suelos, paredes y baños, con un acabado moderno y sin juntas.',
+    points:['Suelos','Paredes','Baños y cocinas'] },
+  { slug:'revestimientos', group:'acabados', name:'Revestimientos', img:'revestimiento.jpg',
+    lead:'La belleza de los detalles.',
+    desc:'Revestimientos de alta calidad y diseños personalizados para tu hogar o negocio.',
+    points:['Paredes','Suelos','Techos'] },
+  { slug:'estuco-veneciano', group:'acabados', name:'Estuco veneciano', img:'veneciano.jpg', featured:true,
+    lead:'¡Descubre el arte en cada rincón! Ahora con nuevas técnicas.',
+    desc:'El estuco veneciano, originario de Venecia en el Renacimiento, combina lo clásico y lo moderno. Su técnica ancestral aporta brillo y elegancia, y hoy lo aplicamos también con nuevas técnicas.',
+    points:['Brillo y elegancia','Nuevas técnicas','Combina lo clásico y lo moderno'] },
+  { slug:'iluminacion', group:'acabados', name:'Iluminación', img:'iluminacion.jpg',
+    lead:'Genera ambientes más amenos y cálidos.',
+    desc:'Variedad y diferentes tipos de iluminación para cada espacio.',
+    points:['Según la incidencia','Según la tonalidad de la luz','Decorativas'] },
+  { slug:'alicatados', group:'acabados', name:'Alicatado', img:'alicatado.jpg',
     lead:'Estancias más limpias y con mayor higiene.',
     desc:'Cerámica con muchas opciones según tus gustos, necesidades y el estilo de tu hogar.',
     points:['Variedad de diseños','Fácil limpieza','Amigable con el medio ambiente','Alta resistencia a golpes y rayones','Fácil instalación'] },
-  { n:13, slug:'montaje', group:'acabados', name:'Montaje', img:'montaje.jpg',
+  { slug:'montaje', group:'acabados', name:'Montaje', img:'montaje.jpg',
     lead:'Lugares conceptualizados. Una experiencia cada día.',
     desc:'Embellece tu hogar o negocio con montajes conceptuales que marcarán la diferencia en tus espacios especiales.',
     points:['Montajes conceptuales','Hogares y negocios','Espacios especiales'] },
-  { n:14, slug:'impresion-digital', group:'acabados', name:'Impresión digital', img:'impresion.jpg',
+  { slug:'papel-impreso', group:'acabados', name:'Papel impreso',
+    lead:'Paredes con personalidad.',
+    desc:'Papel impreso para vestir las paredes de hogares y negocios con el diseño que elijas.',
+    points:['Diseño a elegir','Hogares y negocios','Colocación en pared'] },
+  { slug:'impresion-digital', group:'acabados', name:'Impresión digital', img:'impresion.jpg',
     lead:'Personaliza tus espacios.',
     desc:'La impresión digital se adapta a múltiples aplicaciones: publicidad, promoción de marcas, decoración de habitaciones y otras ideas creativas para vestir una pared.',
     points:['Marcas comerciales','Interiores de empresas y decoración de hogares','Publicidad y marketing','Galerías, museos y exhibiciones de arte'] },
-  { n:15, slug:'pintura-terciopelo', group:'pintura', name:'Pintura terciopelo', img:'terciopelo.jpg',
-    lead:'Ideal para una pared especial, ya sea del dormitorio o del salón.',
-    desc:'Técnica de pintura decorativa para todo tipo de espacios.',
-    points:['Acabado decorativo','Dormitorios y salones','Todo tipo de espacios'] },
-  { n:16, slug:'estuco-veneciano', group:'pintura', name:'Estuco veneciano', img:'veneciano.jpg', featured:true,
-    lead:'¡Descubre el arte en cada rincón!',
-    desc:'El estuco veneciano, originario de Venecia en el Renacimiento, combina lo clásico y lo moderno. Su técnica ancestral aporta brillo y elegancia, con una estética única y contemporánea.',
-    points:['Brillo y elegancia','Estética única y contemporánea','Combina lo clásico y lo moderno'] },
-  { n:17, slug:'estuco-barroco', group:'pintura', name:'Estuco barroco', img:'barroco.jpg',
-    lead:'Agrega un toque artístico y elegante a tus espacios.',
-    desc:'Ideal para paredes y techos irregulares: disimula imperfecciones y deja un acabado detallado y muy estético.',
-    points:['Ideal para paredes y techos irregulares','Disimula imperfecciones','Acabado detallado y muy estético'] },
-  { n:18, slug:'cornisas', group:'acabados', name:'Cornisas', img:'cornisas.jpg',
+  { slug:'cornisas', group:'acabados', name:'Cornisas', img:'cornisas.jpg',
     lead:'¡Decora tus espacios con un estilo clásico embellecido con lo contemporáneo!',
     desc:'Además de decorar, disimulan grietas y fisuras y esconden rieles de cortinas o la luz indirecta perimetral.',
     points:['Disimulan grietas y fisuras','Esconden rieles de cortinas','Integran luz indirecta perimetral'] }
 ];
 
+/* Enlaces antiguos que ahora forman parte de otro servicio */
+const ALIASES = { 'pintura-terciopelo':'pinturas-decorativas', 'estuco-barroco':'pinturas-decorativas' };
+
 const byGroup = g => SERVICES.filter(s => s.group === g);
+const media = s => s.img
+  ? `<img src="img/${s.img}" alt="${s.name}" loading="lazy">`
+  : `<div class="ph-media" role="img" aria-label="${s.name}: fotografía próximamente"><svg viewBox="0 0 24 24" aria-hidden="true">${groupOf(s.group).icon}</svg><span>Fotos próximamente</span></div>`;
 const groupOf = id => GROUPS.find(g => g.id === id);
 const url = s => `servicio.html?s=${s.slug}`;
 
@@ -197,7 +279,7 @@ function renderChrome(){
       <div><h4>Servicios destacados</h4><ul>${SERVICES.filter(x => x.featured).map(x => `<li><a href="${url(x)}">${x.name}</a></li>`).join('')}</ul></div>
       <div><h4>Contacto</h4><ul class="f-contact">
         <li>${IC.wa}<a href="${waLink('Hola ZEWÁ')}" target="_blank" rel="noopener">WhatsApp ${ZEWA.waTxt}</a></li>
-        <li>${IC.tel}<a href="tel:${ZEWA.tel}">Teléfono ${ZEWA.telTxt}</a></li>
+        <li>${IC.tel}<span><a href="tel:${ZEWA.tel}">${ZEWA.telTxt}</a> · <a href="tel:${ZEWA.tel2}">${ZEWA.tel2Txt}</a></span></li>
         <li>${IC.mail}<a href="mailto:${ZEWA.mail}">${ZEWA.mail}</a></li>
       </ul></div>
     </div>
@@ -278,7 +360,7 @@ function initBehaviors(){
 }
 
 /* Piezas reutilizables */
-const pcard = s => `<a class="pcard reveal" href="${url(s)}"><div class="img"><img src="img/${s.img}" alt="${s.name}" loading="lazy"></div><div class="b"><small>${groupOf(s.group).name}</small><h3>${s.name}</h3><p>${s.lead}</p><span class="more">Ver servicio ${IC.arrow}</span></div></a>`;
+const pcard = s => `<a class="pcard reveal" href="${url(s)}"><div class="img">${media(s)}</div><div class="b"><small>${groupOf(s.group).name}</small><h3>${s.name}</h3><p>${s.lead}</p><span class="more">Ver servicio ${IC.arrow}</span></div></a>`;
 const fcard = pcard;
 const gitem = (img, title, label, cat, big) => `<button class="gitem reveal${big?' big':''}" data-cat="${cat||''}" data-full="img/${img}" data-title="${title}" data-label="${label||''}"><img src="img/${img}" alt="${title}" loading="lazy"><span class="cap"><small>${label||''}</small>${title}</span></button>`;
 const compareHTML = (b, a) => `<div class="compare reveal"><img src="img/${a}" alt="Después"><img class="before" src="img/${b}" alt="Antes"><span class="lbl l">ANTES</span><span class="lbl r">DESPUÉS</span><div class="bar"></div><div class="knob"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5V7zm8 0v10l5-5-5-5z"/></svg></div><input type="range" min="0" max="100" value="50" aria-label="Comparar antes y después"></div>`;

@@ -115,6 +115,9 @@ header.site>.wrap{display:flex;align-items:center;gap:var(--s6);height:80px}
 .hero-points li{display:flex;align-items:center;gap:8px;font-weight:500;color:var(--ink);font-size:.98rem}
 .hero-points svg{width:18px;height:18px;stroke:var(--copper);fill:none;stroke-width:2.2;flex:none}
 .hero-photo{position:relative;margin:0}
+.hero-compare{margin:0}
+.hero-compare .compare{box-shadow:var(--sh-2)}
+.hero-compare figcaption{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s2) var(--s4);margin-top:var(--s3);font-size:.9rem;color:var(--muted)}
 .hero-photo img{width:100%;aspect-ratio:4/5;max-height:640px;object-fit:cover;object-position:center 60%;border-radius:var(--radius-lg)}
 .hero-photo figcaption{position:absolute;left:var(--s4);bottom:var(--s4);background:rgba(255,255,255,.94);color:var(--navy);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.82rem;padding:10px 14px;border-radius:var(--radius);box-shadow:var(--sh-1)}
 .hero-photo figcaption small{display:block;font-weight:500;color:var(--muted);font-size:.74rem;margin-bottom:2px}
@@ -142,6 +145,9 @@ header.site>.wrap{display:flex;align-items:center;gap:var(--s6);height:80px}
 .pcard:hover{box-shadow:var(--sh-2);transform:translateY(-3px);border-color:transparent}
 .pcard .img{aspect-ratio:4/3;overflow:hidden;background:var(--cream)}
 .pcard img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.ph-media{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s3);background:var(--cream);color:var(--muted);font-family:'Montserrat',sans-serif;font-weight:500;font-size:.82rem}
+.ph-media svg{width:40px;height:40px;stroke:var(--bronze);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.s-media .ph-media{aspect-ratio:4/3;border-radius:var(--radius-lg)}
 .pcard:hover img{transform:scale(1.04)}
 .pcard .b{display:flex;flex-direction:column;flex:1;padding:var(--s5)}
 .pcard small{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);margin-bottom:6px}

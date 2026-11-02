@@ -32,9 +32,9 @@
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Obras limpias y en plazo</li>
       </ul>
     </div>
-    <figure class="hero-photo reveal">
-      <img src="img/cocina1.jpg" alt="Cocina en U a medida con encimera de madera y muebles en verde" fetchpriority="high">
-      <figcaption><small>Cocinas personalizadas</small>Cocina a medida, llave en mano</figcaption>
+    <figure class="hero-compare reveal">
+      <div id="hero-compare"></div>
+      <figcaption><span>Reforma estructural · arrastra para comparar el antes y el después</span><a class="link-more" href="servicio.html?s=reformas-estructurales">Ver esta reforma</a></figcaption>
     </figure>
   </div>
 </section>
@@ -63,28 +63,7 @@
       <p class="lead">Reformas, cocinas, pintura y acabados con un único interlocutor para todo el proyecto.</p>
     </div>
     <div class="pop" id="pop"></div>
-    <div class="sec-foot reveal"><a class="link-more" href="#lineas">Ver los 18 servicios</a></div>
-  </div>
-</section>
-
-<!-- ANTES / DESPUÉS -->
-<section class="ba-section on-dark" id="antes-despues">
-  <div class="wrap">
-    <div>
-      <div id="hero-compare"></div>
-      <p class="ba-hint">Arrastra el control para comparar.</p>
-    </div>
-    <div class="reveal">
-      <span class="eyebrow">Antes y después</span>
-      <h2>Transformamos la estructura</h2>
-      <p class="lead" style="margin-top:16px">Una reforma estructural en la que el espacio gana luz y amplitud sin perder su carácter original.</p>
-      <ul class="checks">
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Vigas metálicas de refuerzo</li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Apertura de espacios</li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Restauración de vigas de madera originales</li>
-      </ul>
-      <a class="btn btn-light" href="servicio.html?s=reformas-estructurales">Ver reformas estructurales</a>
-    </div>
+    <div class="sec-foot reveal"><a class="link-more" href="#lineas" id="all-count">Ver todos los servicios</a></div>
   </div>
 </section>
 
@@ -175,6 +154,7 @@ renderChrome();
 
 document.getElementById('q-serv').innerHTML = '<option value="" disabled selected>¿Qué necesitas?</option>' + serviceOptions();
 document.getElementById('hero-compare').outerHTML = compareHTML('antes.jpg', 'despues.jpg');
+document.getElementById('all-count').textContent = `Ver los ${SERVICES.length} servicios`;
 
 const POP = ['reformas-integrales', 'cocinas', 'pintura', 'reformas-estructurales', 'pinturas-decorativas', 'pladur'];
 document.getElementById('pop').innerHTML = POP.map(k => pcard(SERVICES.find(s => s.slug === k))).join('');
@@ -190,12 +170,12 @@ document.getElementById('lines').innerHTML = GROUPS.map(g => `
 const G = [
   ['despues.jpg','Pasillo con vigas de madera restauradas','Reformas estructurales','reformas','big'],
   ['cocina2.jpg','Cocina en U con encimera de madera','Cocinas','cocinas'],
-  ['pladur.jpg','Hornacinas iluminadas en pladur','Diseño en Pladur','reformas'],
+  ['pladur.jpg','Hornacinas iluminadas en pladur','Divisiones y diseños en pladur','reformas'],
   ['cornisas.jpg','Cornisa con luz indirecta perimetral','Cornisas','acabados','wide'],
   ['decorativa.jpg','Relieves y paneles decorativos','Pinturas decorativas','pintura'],
-  ['barroco.jpg','Acabado en estuco barroco','Estuco barroco','pintura'],
+  ['barroco.jpg','Acabado en estuco barroco','Pinturas decorativas','pintura'],
   ['revestimiento.jpg','Revestimiento de piedra','Revestimientos','acabados'],
-  ['terciopelo.jpg','Pared en pintura terciopelo','Pintura terciopelo','pintura']
+  ['terciopelo.jpg','Pared en pintura terciopelo','Pinturas decorativas','pintura']
 ];
 document.getElementById('gal').innerHTML = G.map(([img, t, label, cat, size]) =>
   gitem(img, t, label, cat, size === 'big').replace('class="gitem', size === 'wide' ? 'class="gitem wide' : 'class="gitem')).join('');
